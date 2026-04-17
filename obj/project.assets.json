@@ -2,6 +2,18 @@
   "version": 3,
   "targets": {
     "net10.0": {
+      "AspNetCore.Scalar/1.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/AspNetCore.Scalar.dll": {}
+        },
+        "runtime": {
+          "lib/net8.0/AspNetCore.Scalar.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "Microsoft.AspNetCore.OpenApi/10.0.0": {
         "type": "package",
         "dependencies": {
@@ -36,10 +48,42 @@
             "related": ".pdb;.xml"
           }
         }
+      },
+      "Scalar.AspNetCore/2.14.0": {
+        "type": "package",
+        "compile": {
+          "lib/net10.0/Scalar.AspNetCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net10.0/Scalar.AspNetCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       }
     }
   },
   "libraries": {
+    "AspNetCore.Scalar/1.2.0": {
+      "sha512": "DVdi1d+7nyke9pX4Jq1Gws+8CCHoVVQ+7RJeEWBtV5WlyV5q+bzIoA8g2m1vctLTweaQEGAtHyHOBAzkuAYzAw==",
+      "type": "package",
+      "path": "aspnetcore.scalar/1.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "aspnetcore.scalar.1.2.0.nupkg.sha512",
+        "aspnetcore.scalar.nuspec",
+        "lib/net6.0/AspNetCore.Scalar.dll",
+        "lib/net7.0/AspNetCore.Scalar.dll",
+        "lib/net8.0/AspNetCore.Scalar.dll",
+        "lib/netcoreapp3.0/AspNetCore.Scalar.dll",
+        "lib/netstandard2.0/AspNetCore.Scalar.dll"
+      ]
+    },
     "Microsoft.AspNetCore.OpenApi/10.0.0": {
       "sha512": "0aqIF1t+sA2T62LIeMtXGSiaV7keGQaJnvwwmu+htQdjCaKYARfXAeqp4nHH9y2etpilyZ/tnQzZg4Ilmo/c4Q==",
       "type": "package",
@@ -75,11 +119,32 @@
         "microsoft.openapi.2.0.0.nupkg.sha512",
         "microsoft.openapi.nuspec"
       ]
+    },
+    "Scalar.AspNetCore/2.14.0": {
+      "sha512": "YpcCrY+FuPrmFzThm4om8HZ0Lww9vlIQUzUcBpc2Hv4n+oY8SgvFebgBSQJgnaW6y/FgG5J6FU/71HRq/wy9uQ==",
+      "type": "package",
+      "path": "scalar.aspnetcore/2.14.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "icon.png",
+        "lib/net10.0/Scalar.AspNetCore.dll",
+        "lib/net10.0/Scalar.AspNetCore.xml",
+        "lib/net8.0/Scalar.AspNetCore.dll",
+        "lib/net8.0/Scalar.AspNetCore.xml",
+        "lib/net9.0/Scalar.AspNetCore.dll",
+        "lib/net9.0/Scalar.AspNetCore.xml",
+        "scalar.aspnetcore.2.14.0.nupkg.sha512",
+        "scalar.aspnetcore.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
     "net10.0": [
-      "Microsoft.AspNetCore.OpenApi >= 10.0.0"
+      "AspNetCore.Scalar >= 1.2.0",
+      "Microsoft.AspNetCore.OpenApi >= 10.0.0",
+      "Scalar.AspNetCore >= 2.14.0"
     ]
   },
   "packageFolders": {
@@ -125,9 +190,17 @@
       "net10.0": {
         "targetAlias": "net10.0",
         "dependencies": {
+          "AspNetCore.Scalar": {
+            "target": "Package",
+            "version": "[1.2.0, )"
+          },
           "Microsoft.AspNetCore.OpenApi": {
             "target": "Package",
             "version": "[10.0.0, )"
+          },
+          "Scalar.AspNetCore": {
+            "target": "Package",
+            "version": "[2.14.0, )"
           }
         },
         "imports": [

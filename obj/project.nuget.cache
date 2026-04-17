@@ -1,11 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "2NL4ygY3Ft8=",
+  "dgSpecHash": "frcV/wgqNzk=",
   "success": true,
   "projectFilePath": "/Users/aleksandrnehoda/dotnet/VideoGameCharacterAPI/VideoCharacter/VideoCharacter.csproj",
   "expectedPackageFiles": [
+    "/Users/aleksandrnehoda/.nuget/packages/aspnetcore.scalar/1.2.0/aspnetcore.scalar.1.2.0.nupkg.sha512",
     "/Users/aleksandrnehoda/.nuget/packages/microsoft.aspnetcore.openapi/10.0.0/microsoft.aspnetcore.openapi.10.0.0.nupkg.sha512",
-    "/Users/aleksandrnehoda/.nuget/packages/microsoft.openapi/2.0.0/microsoft.openapi.2.0.0.nupkg.sha512"
+    "/Users/aleksandrnehoda/.nuget/packages/microsoft.openapi/2.0.0/microsoft.openapi.2.0.0.nupkg.sha512",
+    "/Users/aleksandrnehoda/.nuget/packages/scalar.aspnetcore/2.14.0/scalar.aspnetcore.2.14.0.nupkg.sha512"
   ],
   "logs": []
 }
