@@ -1,11 +1,14 @@
 using Microsoft.AspNetCore.OpenApi;
 using Scalar.AspNetCore;
+using VideoCharacter.Controllers;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.dotnet add package Scalar.AspNetCore
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
+
+builder.Services.AddScoped<IVideoGameCharacterService, VideoGameCharacterService>();
 
 var app = builder.Build();
 app.MapControllers();
