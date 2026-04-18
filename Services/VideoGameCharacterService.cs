@@ -31,7 +31,14 @@ public class VideoGameCharacterService(AppDbContext _context) : IVideoGameCharac
 
     public Task<bool> DeleteCharacterAsync(int id)
     {
-        throw new NotImplementedException();
+        var character = _context.Characters.Find(id);
+        if (character == null)
+        {
+            return Task.FromResult(false);
+        }
+        _context.Characters.Remove(character);
+        _context.SaveChanges();
+        return Task.FromResult(true);
     }
 
 }

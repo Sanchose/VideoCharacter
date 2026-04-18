@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using VideoCharacter.Dtos;
 using VideoCharacter.Models;
 
 namespace VideoCharacter.Controllers
@@ -8,13 +9,13 @@ namespace VideoCharacter.Controllers
     public class GameCharacterController(IVideoGameCharacterService service) : ControllerBase
 {
         [HttpGet]
-        public async Task<ActionResult<List<Character>>> GetCharacters()
+        public async Task<ActionResult<List<CharacterResponse>>> GetCharacters()
         {
             return Ok(await service.GetAllCharactersAsync());
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Character>> GetCharacter(int id)
+        public async Task<ActionResult<CharacterResponse>> GetCharacter(int id)
         {
             var character = await service.GetCharacterByIdAsync(id);
             if (character == null)
