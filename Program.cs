@@ -1,12 +1,16 @@
 using Microsoft.AspNetCore.OpenApi;
 using Scalar.AspNetCore;
 using VideoCharacter.Controllers;
+using Microsoft.EntityFrameworkCore;
+using VideoCharacter.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.dotnet add package Scalar.AspNetCore
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlite("Data Source=video.db"));
 
 builder.Services.AddScoped<IVideoGameCharacterService, VideoGameCharacterService>();
 
