@@ -23,6 +23,22 @@ namespace VideoCharacter.Controllers
             }
             return Ok(character);  
         }
+        [HttpPost]
+        public async Task<ActionResult<Character>> AddCharacter([FromBody] Character character)
+        {
+            var addedCharacter = await service.AddCharacterAsync(character);
+            return CreatedAtAction(nameof(GetCharacter), new { id = addedCharacter.Id }, addedCharacter);
+        }
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteCharacter(int id)
+        {
+            var success = await service.DeleteCharacterAsync(id);
+            if (!success)
+            {
+                return NotFound();
+            }
+            return NoContent();
+        }
 
     }
 }

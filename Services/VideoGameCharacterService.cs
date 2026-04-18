@@ -1,30 +1,27 @@
 using VideoCharacter.Models;
 using VideoCharacter.Controllers;
+using VideoCharacter.Data;
+using Microsoft.EntityFrameworkCore;
 namespace VideoCharacter.Controllers;
 
-public class VideoGameCharacterService : IVideoGameCharacterService
+public class VideoGameCharacterService(AppDbContext _context) : IVideoGameCharacterService
 {
-    static List<Character> Characters = new List<Character>
-        {
-            new Character { Id = 1, Name = "Mario", Game = "Super Mario Bros.", Role = "Protagonist" },
-            new Character { Id = 2, Name = "Link", Game = "The Legend of Zelda", Role = "Protagonist" },
-            new Character { Id = 3, Name = "Master Chief", Game = "Halo", Role = "Protagonist" },
-            new Character { Id = 4, Name = "dfvdfvdfv", Game = "dfvdfvdv", Role = "dfvdfvdf" },
-        };
-    public Task<List<Character>> GetAllCharactersAsync()
+    public async Task<List<Character>> GetAllCharactersAsync()
     {
-        return Task.FromResult(Characters);
+        return await _context.Characters.ToListAsync();
     }
 
     public async Task<Character?> GetCharacterByIdAsync(int id)
     {
-        var character = Characters.FirstOrDefault(c => c.Id == id);
-        return await Task.FromResult(character);
+        var character = await _context.Characters.FindAsync(id);
+        return character;
     }
 
     public Task<Character> AddCharacterAsync(Character character)
     {
-        throw new NotImplementedException();
+        var entry = _context.Characters.Add(character);
+        _context.SaveChanges();
+        return Task.FromResult(entry.Entity);
     }
 
     public Task<bool> UpdateCharacterAsync()
