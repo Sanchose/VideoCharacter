@@ -24,10 +24,24 @@ namespace VideoCharacter.Controllers
             }
             return Ok(character);  
         }
-        [HttpPost]
+        [HttpPost("Full")]
         public async Task<ActionResult<Character>> AddCharacter([FromBody] Character character)
         {
             var addedCharacter = await service.AddCharacterAsync(character);
+            return CreatedAtAction(nameof(GetCharacter), new { id = addedCharacter.Id }, addedCharacter);
+        }
+        [HttpPost]
+        public async Task<ActionResult<Character>> AddCharacter([FromBody] CharacterCreateDto dto)
+        {
+            var character = new Character
+            {
+                Name = dto.Name,
+                Game = dto.Game,
+                Role = dto.Role
+            };
+
+            var addedCharacter = await service.AddCharacterAsync(character);
+
             return CreatedAtAction(nameof(GetCharacter), new { id = addedCharacter.Id }, addedCharacter);
         }
         [HttpDelete("{id}")]
@@ -40,6 +54,17 @@ namespace VideoCharacter.Controllers
             }
             return NoContent();
         }
-
-    }
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateCharacter(int id, [FromBody] Character character)
+        {
+            if (id != character.Id)
+            {
+                return BadRequest();
+            }
+            var success = await service.UpdateCharacterAsync(id, character);
+            if (!success)            {
+                return NotFound(); }
+            return NoContent();
+        }
+}
 }

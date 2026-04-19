@@ -34,10 +34,30 @@ public class VideoGameCharacterService(AppDbContext _context) : IVideoGameCharac
         _context.SaveChanges();
         return Task.FromResult(entry.Entity);
     }
-
-    public Task<bool> UpdateCharacterAsync()
+    public Task<Character> AddCharacterAsync(CharacterCreateDto characterDto)
     {
-        throw new NotImplementedException();
+        var character = new Character
+        {
+            Name = characterDto.Name,
+            Game = characterDto.Game,
+            Role = characterDto.Role
+        };
+        var entry = _context.Characters.Add(character);
+        _context.SaveChanges();
+        return Task.FromResult(entry.Entity);
+    }
+
+    public Task<bool> UpdateCharacterAsync(int id, Character character)
+    {
+        var existingCharacter = _context.Characters.Find(id);
+        if (existingCharacter == null)
+        {
+            return Task.FromResult(false);
+        }
+        existingCharacter.Game = character.Game;
+        existingCharacter.Role = character.Role;
+        _context.SaveChanges();
+        return Task.FromResult(true);
     }
 
     public Task<bool> DeleteCharacterAsync(int id)
