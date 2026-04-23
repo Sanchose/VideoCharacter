@@ -28,6 +28,16 @@ public class VideoGameCharacterService(AppDbContext _context) : IVideoGameCharac
         }).FirstOrDefaultAsync();
     }
 
+    public async Task<CharacterResponse?> GetCharacterByRoleAndGameAsync(string? Role, string? Game)
+    {
+        return await _context.Characters.Where(c => c.Role == Role && c.Game == Game).Select(c => new CharacterResponse
+        {
+            Name = c.Name,
+            Game = c.Game,
+            Role = c.Role
+        }).FirstOrDefaultAsync();
+    }
+
     public Task<Character> AddCharacterAsync(Character character)
     {
         var entry = _context.Characters.Add(character);
@@ -40,7 +50,7 @@ public class VideoGameCharacterService(AppDbContext _context) : IVideoGameCharac
         {
             Name = characterDto.Name,
             Game = characterDto.Game,
-            Role = characterDto.Role
+            Role = characterDto.Role.ToString()
         };
         var entry = _context.Characters.Add(character);
         _context.SaveChanges();

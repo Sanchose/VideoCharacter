@@ -9,6 +9,9 @@
 /Users/aleksandrnehoda/dotnet/VideoGameCharacterAPI/VideoCharacter/bin/Debug/net10.0/AspNetCore.Scalar.dll
 /Users/aleksandrnehoda/dotnet/VideoGameCharacterAPI/VideoCharacter/bin/Debug/net10.0/Azure.Core.dll
 /Users/aleksandrnehoda/dotnet/VideoGameCharacterAPI/VideoCharacter/bin/Debug/net10.0/Azure.Identity.dll
+/Users/aleksandrnehoda/dotnet/VideoGameCharacterAPI/VideoCharacter/bin/Debug/net10.0/FluentValidation.dll
+/Users/aleksandrnehoda/dotnet/VideoGameCharacterAPI/VideoCharacter/bin/Debug/net10.0/FluentValidation.AspNetCore.dll
+/Users/aleksandrnehoda/dotnet/VideoGameCharacterAPI/VideoCharacter/bin/Debug/net10.0/FluentValidation.DependencyInjectionExtensions.dll
 /Users/aleksandrnehoda/dotnet/VideoGameCharacterAPI/VideoCharacter/bin/Debug/net10.0/Humanizer.dll
 /Users/aleksandrnehoda/dotnet/VideoGameCharacterAPI/VideoCharacter/bin/Debug/net10.0/Microsoft.AspNetCore.OpenApi.dll
 /Users/aleksandrnehoda/dotnet/VideoGameCharacterAPI/VideoCharacter/bin/Debug/net10.0/Microsoft.Bcl.AsyncInterfaces.dll

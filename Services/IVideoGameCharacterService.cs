@@ -5,6 +5,7 @@ public interface IVideoGameCharacterService
 {
     Task<List<CharacterResponse>> GetAllCharactersAsync();
     Task<CharacterResponse?> GetCharacterByIdAsync(int id);
+    Task<CharacterResponse?> GetCharacterByRoleAndGameAsync(string? Role, string? Game);
     Task<Character> AddCharacterAsync(Character character);
     Task<Character> AddCharacterAsync(CharacterCreateDto characterDto);
     Task<bool> UpdateCharacterAsync(int id, Character character);

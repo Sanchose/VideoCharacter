@@ -1,12 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "ustbSx8P5b0=",
+  "dgSpecHash": "kMLINvN1MoQ=",
   "success": true,
   "projectFilePath": "/Users/aleksandrnehoda/dotnet/VideoGameCharacterAPI/VideoCharacter/VideoCharacter.csproj",
   "expectedPackageFiles": [
     "/Users/aleksandrnehoda/.nuget/packages/aspnetcore.scalar/1.2.0/aspnetcore.scalar.1.2.0.nupkg.sha512",
     "/Users/aleksandrnehoda/.nuget/packages/azure.core/1.47.1/azure.core.1.47.1.nupkg.sha512",
     "/Users/aleksandrnehoda/.nuget/packages/azure.identity/1.14.2/azure.identity.1.14.2.nupkg.sha512",
+    "/Users/aleksandrnehoda/.nuget/packages/fluentvalidation/11.11.0/fluentvalidation.11.11.0.nupkg.sha512",
+    "/Users/aleksandrnehoda/.nuget/packages/fluentvalidation.aspnetcore/11.3.1/fluentvalidation.aspnetcore.11.3.1.nupkg.sha512",
+    "/Users/aleksandrnehoda/.nuget/packages/fluentvalidation.dependencyinjectionextensions/11.11.0/fluentvalidation.dependencyinjectionextensions.11.11.0.nupkg.sha512",
     "/Users/aleksandrnehoda/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/Users/aleksandrnehoda/.nuget/packages/microsoft.aspnetcore.openapi/10.0.0/microsoft.aspnetcore.openapi.10.0.0.nupkg.sha512",
     "/Users/aleksandrnehoda/.nuget/packages/microsoft.bcl.asyncinterfaces/8.0.0/microsoft.bcl.asyncinterfaces.8.0.0.nupkg.sha512",
