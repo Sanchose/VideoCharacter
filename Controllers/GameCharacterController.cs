@@ -72,7 +72,7 @@ namespace VideoCharacter.Controllers
             var character = new Character
             {
                 Name = dto.Name,
-                Game = dto.Game,
+                Game = dto.Game.ToString(),
                 Role = dto.Role.ToString()
             };
 

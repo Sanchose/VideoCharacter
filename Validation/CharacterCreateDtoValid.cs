@@ -1,5 +1,7 @@
+using System.Globalization;
 using FluentValidation;
 using VideoCharacter.Dtos;
+using VideoCharacter.Models;
 
 public class CharacterCreateDtoValidator : AbstractValidator<CharacterCreateDto>
 {
@@ -11,22 +13,29 @@ public class CharacterCreateDtoValidator : AbstractValidator<CharacterCreateDto>
             .Matches(@"^[a-zA-Z0-9\s]+$").WithMessage("Name can only contain letters, numbers, and spaces.");
 
         RuleFor(x => x.Game)
-            .NotEmpty().WithMessage("Game is required.");
+        .NotNull().WithMessage("Game is required")
+        .IsInEnum().WithMessage("Invalid game");
 
-        RuleFor(x => x.Role)
-            .IsInEnum().WithMessage("Role must be a valid enum value.");
+        RuleFor(x => x)
+        .Must(BeValidRoleForGame)
+        .WithMessage("Invalid role for the specified game");
     }
-    private bool BeValidRoleForGame(CharacterCreateDto dto, CharacterCreateDto.CharacterRole role)
+    private bool BeValidRoleForGame(CharacterCreateDto dto)
     {
-            if (dto.Game == "Rust" && (role == CharacterCreateDto.CharacterRole.Dachlose || role == CharacterCreateDto.CharacterRole.Toproof || role == CharacterCreateDto.CharacterRole.BigBoss))
-            {
-                return true; // Valid role for this game
-            }
-            if ((dto.Game == "CS2") && (role == CharacterCreateDto.CharacterRole.Antagonist || role == CharacterCreateDto.CharacterRole.Supporting || role == CharacterCreateDto.CharacterRole.Protagonist))
-            {
-                return true; // Valid role for this game
-            }
-    
-            return false; // Invalid role for the specified game
+        if (dto.Game == CharacterCreateDto.CharacterGame.Rust)
+        {
+            return dto.Role == CharacterCreateDto.CharacterRole.Dachlose ||
+                   dto.Role == CharacterCreateDto.CharacterRole.Toproof ||
+                   dto.Role == CharacterCreateDto.CharacterRole.BigBoss;
+        }
+
+        if (dto.Game == CharacterCreateDto.CharacterGame.CS2)
+        {
+            return dto.Role == CharacterCreateDto.CharacterRole.Protagonist ||
+                   dto.Role == CharacterCreateDto.CharacterRole.Antagonist ||
+                   dto.Role == CharacterCreateDto.CharacterRole.Supporting;
+        }
+
+        return false;
     }
 }

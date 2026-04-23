@@ -3,6 +3,7 @@ using VideoCharacter.Controllers;
 using VideoCharacter.Data;
 using Microsoft.EntityFrameworkCore;
 using VideoCharacter.Dtos;
+using VideoCharacter.Exceptions;
 namespace VideoCharacter.Controllers;
 
 public class VideoGameCharacterService(AppDbContext _context) : IVideoGameCharacterService
@@ -45,11 +46,19 @@ public class VideoGameCharacterService(AppDbContext _context) : IVideoGameCharac
         return Task.FromResult(entry.Entity);
     }
     public Task<Character> AddCharacterAsync(CharacterCreateDto characterDto)
-    {
+    {         
+        if (!Enum.IsDefined(typeof(CharacterCreateDto.CharacterGame), characterDto.Game))
+        {
+            throw new ApiException("Invalid game");
+        }
+        if (!Enum.IsDefined(typeof(CharacterCreateDto.CharacterRole), characterDto.Role))
+        {
+            throw new ApiException("Invalid game");
+        }
         var character = new Character
         {
             Name = characterDto.Name,
-            Game = characterDto.Game,
+            Game = characterDto.Game.ToString(),
             Role = characterDto.Role.ToString()
         };
         var entry = _context.Characters.Add(character);
