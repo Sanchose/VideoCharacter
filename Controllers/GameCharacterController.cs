@@ -3,10 +3,12 @@ using VideoCharacter.Dtos;
 using VideoCharacter.Models;
 using VideoCharacter.Data;
 using Microsoft.EntityFrameworkCore;
+using VideoCharacter.Controllers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace VideoCharacter.Controllers
 {
-    
+
     [Route("api/[controller]")]
     [ApiController]
 
@@ -22,7 +24,8 @@ namespace VideoCharacter.Controllers
             _context = context;
             _service = service;
         }
-    
+
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<List<CharacterResponse>>> GetCharacters()
         {
@@ -37,12 +40,12 @@ namespace VideoCharacter.Controllers
             {
                 return NotFound();
             }
-            return Ok(character);  
+            return Ok(character);
         }
         [HttpGet("search")]
         public async Task<ActionResult<List<CharacterResponse>>> GetCharacter(string? role, string? game)
         {
-            
+
             if (string.IsNullOrEmpty(role) && string.IsNullOrEmpty(game))
                 return BadRequest("Вкажи role або game");
 
@@ -80,6 +83,35 @@ namespace VideoCharacter.Controllers
 
             return CreatedAtAction(nameof(GetCharacter), new { id = addedCharacter.Id }, addedCharacter);
         }
+
+        [HttpPost("register")]
+        public ActionResult<AuthResponseDto> Register([FromBody] UserRegisterDto registerDto)
+        {
+            try
+            {
+                var authResponse = new RegistrationService(_context).Register(registerDto);
+                return Ok(authResponse);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("login")]
+        public ActionResult<AuthResponseDto> Login([FromBody] UserLoginDto loginDto)
+        {
+            try
+            {
+                var authResponse = new AuthService(_context).Login(loginDto);
+                return Ok(authResponse);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteCharacter(int id)
         {
@@ -98,9 +130,11 @@ namespace VideoCharacter.Controllers
                 return BadRequest();
             }
             var success = await _service.UpdateCharacterAsync(id, character);
-            if (!success)            {
-                return NotFound(); }
+            if (!success)
+            {
+                return NotFound();
+            }
             return NoContent();
         }
-}
+    }
 }

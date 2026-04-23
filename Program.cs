@@ -11,6 +11,10 @@ using FluentValidation.AspNetCore;
 using VideoCharacter.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using ApiBehaviorOptions = Microsoft.AspNetCore.Mvc.ApiBehaviorOptions;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.dotnet add package Scalar.AspNetCore
@@ -30,28 +34,43 @@ builder.Services.AddControllers()
 
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
-options.InvalidModelStateResponseFactory = context =>
-{
-    var errors = context.ModelState
-        .Where(x => x.Value.Errors.Count > 0)
-        .Select(x => new
-        {
-            field = x.Key,
-            messages = x.Value.Errors.Select(e => e.ErrorMessage)
-        });
-
-    return new BadRequestObjectResult(new
+    options.InvalidModelStateResponseFactory = context =>
     {
-        error = "Validation failed",
-        details = errors
-    });
-};
+        var errors = context.ModelState
+            .Where(x => x.Value.Errors.Count > 0)
+            .Select(x => new
+            {
+                field = x.Key,
+                messages = x.Value.Errors.Select(e => e.ErrorMessage)
+            });
+
+        return new BadRequestObjectResult(new
+        {
+            error = "Validation failed",
+            details = errors
+        });
+    };
 });
 
 builder.Services.AddControllers();
 
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<CharacterCreateDtoValidator>();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes("super_secret_key_123"))
+        };
+    });
+
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 app.MapControllers();
@@ -92,6 +111,9 @@ app.UseExceptionHandler(appError =>
 });
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 var summaries = new[]
 {

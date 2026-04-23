@@ -190,3 +190,5 @@
 /Users/aleksandrnehoda/dotnet/VideoGameCharacterAPI/VideoCharacter/obj/Debug/net10.0/VideoCharacter.pdb
 /Users/aleksandrnehoda/dotnet/VideoGameCharacterAPI/VideoCharacter/obj/Debug/net10.0/VideoCharacter.genruntimeconfig.cache
 /Users/aleksandrnehoda/dotnet/VideoGameCharacterAPI/VideoCharacter/obj/Debug/net10.0/ref/VideoCharacter.dll
+/Users/aleksandrnehoda/dotnet/VideoGameCharacterAPI/VideoCharacter/bin/Debug/net10.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/aleksandrnehoda/dotnet/VideoGameCharacterAPI/VideoCharacter/bin/Debug/net10.0/BCrypt.Net-Next.dll
